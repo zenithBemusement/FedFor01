@@ -1,0 +1,145 @@
+﻿@model List<FedFor01.Models.RECDATA>
+<head>
+
+    <title>Facility</title>
+    <style>
+        /* Set the size of the div element that contains the map */
+        #map {
+            height: 400px; /* The height is 400 pixels */
+            width: 100%; /* The width is the width of the web page */
+        }
+    </style>
+</head>
+
+@* !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! IGNORE THIS PAGE, ONLY KEPT FOR ARCHIVAL PURPOSES !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! *@
+
+
+<body>
+    <div id="map"></div>
+    <script type="text/javascript">
+
+       function targetFac(plat, plog) {
+           var map = new google.maps.Map(document.getElementById("map"), {
+               zoom: 10,
+               center: { lat: plat, lng: plog },
+               mapTypeId: "terrain"
+           });
+        //google.maps.event.trigger(map, 'resize');
+
+
+         @foreach (var item in Model) {
+        @:addMarker(@item.FacilityLatitude, @item.FacilityLongitude, '@item.FacilityName', map);
+       }
+
+       }
+
+       function initMap() {
+
+           // Create the map.
+           //var map = new google.maps.Map(document.getElementById("map"), {
+           //    zoom: 8,
+           //    center: { lat: 37.6876, lng: -91.0828 },
+           //    mapTypeId: google.maps.MapTypeId.ROADMAP
+           });
+
+
+
+    }
+
+    // Declare addMarker function
+    function addMarker(latitude, longitude, title,  map)
+    {
+        var latLng = new google.maps.LatLng(latitude, longitude);
+        var contentString = '<h3>' + title + '</h3>' + '<p> Description</p>';
+
+        var infowindow = new google.maps.InfoWindow({
+            content: contentString
+        });
+
+        var marker = new google.maps.Marker({
+            position: latLng,
+            title: title,
+
+            map: map,
+            draggable: false
+        });
+
+        google.maps.event.addListener(marker, 'click', function () {
+            infowindow.open(map, marker);
+        });
+    }
+
+    // Now add markers
+         @foreach (var item in Model) {
+        @:addMarker(@item.FacilityLatitude, @item.FacilityLongitude, '@item.FacilityName',  map);
+    }
+
+    </script>
+
+
+    @*<script async defer
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCsRgeXCc_jaRPraI_XZGuEWSJgWp9wmxo &callback=initMap">
+    </script>*@
+
+
+    @* google map api key  AIzaSyCsRgeXCc_jaRPraI_XZGuEWSJgWp9wmxo   *@
+    @*@using (Ajax.BeginForm("GetFromMainFrame", "Home", null,
+            new { role = "form" }))
+        {*@
+
+
+    <h2>Facility</h2>
+    <div id="div1">
+        <table class="table">
+            <thead>
+                <tr class="bg-primary">
+                    <th>FacilityName</th>
+                    <th>FacilityID</th>
+                    <th>FacilityLatitude</th>
+                    <th>FacilityLongitude</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var RECDATA in Model)
+                {
+                    <tr>
+                        <td>
+                            @RECDATA.FacilityName
+                        </td>
+                        <td class="bg-info">
+                            @RECDATA.FacilityID
+                            <button id="loadFromMainFrame" onclick="targetFac(@RECDATA.FacilityLatitude,@RECDATA.FacilityLongitude)">Select</button>
+                        </td>
+                        <td class="bg-info">@RECDATA.FacilityLatitude</td>
+                        <td class="bg-info">@RECDATA.FacilityLongitude</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+    @*  *@
+</body>
+
+@{
+    //if have a key
+    //        8319e388 - bede - 4b79 - 9b40 - 68faf1a8f49c
+
+    ViewBag.Title = "Facility";
+    //curl - X GET "https://ridb.recreation.gov/api/v1/Facilitys/77503/attributes?limit=50&offset=0" - H "accept: application/json"
+
+    //​/ Facilitys​ /{ FacilityId}
+    //https://www.fs.usda.gov/recarea/mtnf/recarea/?recid=77503
+
+    //curl - X GET "https://ridb.recreation.gov/api/v1/Facilitys/77503/attributes?limit=50&offset=0" - H "accept: application/json" - H "apikey: 8319e388 - bede - 4b79 - 9b40 - 68faf1a8f49c"
+
+
+    ////https://ridb.recreation.gov/api/v1/Facilitys/77503/attributes?limit=50&offset=0
+
+
+
+
+
+}
+
+

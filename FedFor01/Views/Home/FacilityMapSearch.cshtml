@@ -1,0 +1,209 @@
+﻿@model IEnumerable<FedFor01.Models.RECDATA>
+
+@{
+    ViewBag.Title = "FacilityMapSearch";
+}
+
+@{
+int offset = 0;
+}} 
+
+    <head>
+
+        <title>Facility</title>
+        <style>
+            /* Set the size of the div element that contains the map */
+            #map {
+                height: 400px; /* The height is 400 pixels */
+                width: 100%; /* The width is the width of the web page */
+            }
+        </style>
+    </head>
+
+
+    <body>
+
+        <div id="map"></div>
+        <script type="text/javascript">
+
+       function targetFac(plat, plog) {
+           var map = new google.maps.Map(document.getElementById("map"), {
+               zoom: 10,
+               center: { lat: plat, lng: plog },
+               mapTypeId: "terrain"
+           });
+
+         @foreach (var item in Model) {
+        @:addMarker(@item.FacilityLatitude, @item.FacilityLongitude, '@item.FacilityName', '@Uri.EscapeUriString(item.FacilityDescription)',  map);
+       }
+
+       }
+
+           function initMap()
+           {
+
+           // Create the map.
+           //var map = new google.maps.Map(document.getElementById("map"), {
+           //    zoom: 8,
+           //    center: { lat: 37.6876, lng: -91.0828 },
+           //    mapTypeId: google.maps.MapTypeId.ROADMAP
+           //    });
+
+
+
+            }
+
+    // Declare addMarker function
+       function addMarker(latitude, longitude, title, Description,  map)
+            {
+                   var latLng = new google.maps.LatLng(latitude, longitude);
+                   var contentString = '<h3>' + title + '</h3>' + '<p> ' + decodeURI(Description); + '</p>';
+
+                   var infowindow = new google.maps.InfoWindow({
+                    content: contentString
+                });
+
+                var marker = new google.maps.Marker({
+                    position: latLng,
+                    title: title,
+                    Description: decodeURI(Description),
+                    map: map,
+                    draggable: false
+                });
+
+                google.maps.event.addListener(marker, 'click', function () {
+                    infowindow.open(map, marker);
+                });
+            }
+
+
+        </script>
+
+
+        @*<script async defer
+                src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCsRgeXCc_jaRPraI_XZGuEWSJgWp9wmxo &callback=initMap">
+        </script>*@
+
+
+        @using (Html.BeginForm("FacilityMapSearch", "Home", FormMethod.Get))
+        {
+            <b> Search: </b> @Html.Editor("search")
+
+            <b> Campsites Displayed: </b>@Html.Editor("searchnumber")
+
+            @*<b> Activity: </b>@Html.Editor("activity")*@
+            <select id='activity' name="activity">
+                <option value="">Select Activity</option>
+                <option>Camping</option>
+                <option>Boating</option>
+            </select>
+
+            <select id="stateinitial" name="stateinitial">
+                <option value="MO">Missouri</option>
+                <option value="">Select State</option>
+                <option value="AL">Alabama</option>
+                <option value="AK">Alaska</option>
+                <option value="AZ">Arizona</option>
+                <option value="AR">Arkansas</option>
+                <option value="CA">California</option>
+                <option value="CO">Colorado</option>
+                <option value="CT">Connecticut</option>
+                <option value="DE">Delaware</option>
+                <option value="FL">Florida</option>
+                <option value="GA">Georgia</option>
+                <option value="HI">Hawaii</option>
+                <option value="ID">Idaho</option>
+                <option value="IL">Illinois</option>
+                <option value="IN">Indiana</option>
+                <option value="IA">Iowa</option>
+                <option value="KS">Kansas</option>
+                <option value="KY">Kentucky</option>
+                <option value="LA">Louisiana</option>
+                <option value="ME">Maine</option>
+                <option value="MD">Maryland</option>
+                <option value="MA">Massachusetts</option>
+                <option value="MI">Michigan</option>
+                <option value="MN">Minnesota</option>
+                <option value="MS">Mississippi</option>
+                <option value="MO">Missouri</option>
+                <option value="MT">Montana</option>
+                <option value="NE">Nebraska</option>
+                <option value="NV">Nevada</option>
+                <option value="NH">New Hampshire</option>
+                <option value="NJ">New Jersey</option>
+                <option value="NM">New Mexico</option>
+                <option value="NY">New York</option>
+                <option value="NC">North Carolina</option>
+                <option value="ND">North Dakota</option>
+                <option value="OH">Ohio</option>
+                <option value="OK">Oklahoma</option>
+                <option value="OR">Oregon</option>
+                <option value="PA">Pennsylvania</option>
+                <option value="RI">Rhode Island</option>
+                <option value="SC">South Carolina</option>
+                <option value="SD">South Dakota</option>
+                <option value="TN">Tennessee</option>
+                <option value="TX">Texas</option>
+                <option value="UT">Utah</option>
+                <option value="VT">Vermont</option>
+                <option value="VA">Virginia</option>
+                <option value="WA">Washington</option>
+                <option value="WV">West Virginia</option>
+                <option value="WI">Wisconsin</option>
+                <option value="WY">Wyoming</option>
+            </select>
+
+            <select id='sort' name="sort">
+                @*<option value="">Sort By</option>*@
+                <option>Name</option>
+                <option>ID</option>
+                <option>Date</option>
+            </select>
+
+            //This bit right here has been my attempts to implement paging via a button. Primary issue is getting a value that can be edited with a button press and then passed into the controller.
+            <button type="button" id="increaseOffset" onclick="IncreaseOffset()">Increase @offset</button>
+            <input type="number" step="50" value="0" id="offset">
+
+
+            <input type="submit" name="submit" value="Search" />
+        }
+        <script>
+            function IncreaseOffset() { var offset = offset + 50; }
+        </script>
+
+        <h2>Facility</h2>
+        <div id="div1">
+            <table class="table">
+                <thead>
+                    <tr class="bg-primary">
+                        <th>FacilityName</th>
+                        <th>FacilityID</th>
+                        <th>FacilityLatitude</th>
+                        <th>FacilityLongitude</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var RECDATA in Model)
+                    {
+                        <tr>
+                            <td>
+                                @RECDATA.FacilityName
+                            </td>
+                            <td class="bg-info">
+                                @RECDATA.FacilityID
+                                <button id="loadFromMainFrame" onclick="targetFac(@RECDATA.FacilityLatitude,@RECDATA.FacilityLongitude)">Select</button>
+                            </td>
+                            <td class="bg-info">@RECDATA.FacilityLatitude</td>
+                            <td class="bg-info">@RECDATA.FacilityLongitude</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        @*  *@
+    </body>
+
+@{  
+
+}
