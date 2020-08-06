@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
@@ -55,7 +56,7 @@ namespace FedFor01.Models
         public string Keywords { get; set; }
         public bool Reservable { get; set; }
         public bool Enabled { get; set; }
-        public string LastUpdatedDate { get; set; }
+        public string LastUpdatedDate { get; set; }     
         public Facility[] Facility { get; set; }
         public PERMITENTRANCE[] PERMITENTRANCE { get; set; }
         public TOUR[] TOUR { get; set; }
@@ -66,6 +67,8 @@ namespace FedFor01.Models
         public EVENT[] EVENT { get; set; }
         public LINK[] LINK { get; set; }
         public Medium[] MEDIA { get; set; }
+
+        
     }
 
     public class GEOJSON

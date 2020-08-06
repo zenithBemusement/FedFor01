@@ -14,78 +14,184 @@
 @* !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! IGNORE THIS PAGE, ONLY KEPT FOR ARCHIVAL PURPOSES !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! *@
 
 
+
 <body>
     <div id="map"></div>
     <script type="text/javascript">
 
-       function targetFac(plat, plog) {
-           var map = new google.maps.Map(document.getElementById("map"), {
-               zoom: 10,
-               center: { lat: plat, lng: plog },
-               mapTypeId: "terrain"
+        document.getElementById("myform").addEventListener('submit', function (event) {
+            event.preventDefault()
+        });
+
+
+        function SendData() {
+            alert("here1");
+            var myform = document.getElementById("myform");
+            var fd = new FormData(myform)
+            alert(fd.get("stateinitial"));
+
+
+        }
+
+
+
+        function formtodata() {
+            alert("here1");
+            return false;
+
+        }
+
+        //var myform = document.getElementById(myform);
+
+        function targetFac(plat, plog) {
+
+            alert("here1");
+            var myform = document.getElementById("myform");
+            var fd = new FormData(myform)
+            alert(fd.get("activity"));
+
+             $.ajax({
+                 url: 'Facility',
+                 data: {
+                     lat: plat, lng: plog, stateinitial: fd.get("stateinitial"), sort: fd.get("sort"), offset: fd.get("offset"), search: fd.get("search"), searchnumber: fd.get("searchnumber"), activity: fd.get("activity") },
+               type: "POST",
+               success: function (data) {
+                 $("body").html(data,map);
+               }
            });
-        //google.maps.event.trigger(map, 'resize');
-
-
-         @foreach (var item in Model) {
-        @:addMarker(@item.FacilityLatitude, @item.FacilityLongitude, '@item.FacilityName', map);
-       }
-
-       }
+        }
 
        function initMap() {
 
-           // Create the map.
-           //var map = new google.maps.Map(document.getElementById("map"), {
-           //    zoom: 8,
-           //    center: { lat: 37.6876, lng: -91.0828 },
-           //    mapTypeId: google.maps.MapTypeId.ROADMAP
+           var myLat= @ViewBag.lat;
+           var mylng = @ViewBag.lng;
+           var count = @ViewBag.count;
+
+           if (count == 0) {
+               //// Create the map.
+
+               var map = new google.maps.Map(document.getElementById("map"), {
+                   zoom: 7,
+                   center: { lat: 37.6876, lng: -91.0828 },
+                   mapTypeId: google.maps.MapTypeId.ROADMAP
+               });
+           } else {
+
+               var map = new google.maps.Map(document.getElementById("map"), {
+                   zoom: 10,
+                   center: { lat: myLat, lng: mylng },
+                   mapTypeId: "terrain"
+               });
+
+              @foreach (var item in Model) {
+                   @:addMarker(@item.FacilityLatitude, @item.FacilityLongitude, '@item.FacilityName', '@Uri.EscapeUriString(item.FacilityDescription)', map);
+                          }
+           }
+
+           map.addListener('click', function (mapsMouseEvent) {
+               targetFac(mapsMouseEvent.latLng.lat(), mapsMouseEvent.latLng.lng() );
+
            });
-
-
 
     }
 
     // Declare addMarker function
-    function addMarker(latitude, longitude, title,  map)
+       function addMarker(latitude, longitude, title, Description,  map)
     {
-        var latLng = new google.maps.LatLng(latitude, longitude);
-        var contentString = '<h3>' + title + '</h3>' + '<p> Description</p>';
+           var latLng = new google.maps.LatLng(latitude, longitude);
+           var contentString = '<h3>' + title + '</h3>' + '<p> ' + decodeURI(Description); + '</p>';
 
-        var infowindow = new google.maps.InfoWindow({
+           var infowindow = new google.maps.InfoWindow({
             content: contentString
         });
 
         var marker = new google.maps.Marker({
             position: latLng,
             title: title,
-
+            Description: decodeURI(Description),
             map: map,
             draggable: false
         });
 
         google.maps.event.addListener(marker, 'click', function () {
-            infowindow.open(map, marker);
+             infowindow.open(map, marker);
         });
+
+
+
     }
 
-    // Now add markers
-         @foreach (var item in Model) {
-        @:addMarker(@item.FacilityLatitude, @item.FacilityLongitude, '@item.FacilityName',  map);
-    }
 
     </script>
 
+    @*<script>
+            formtodata
+        </script>*@
 
-    @*<script async defer
+    <script async defer
             src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCsRgeXCc_jaRPraI_XZGuEWSJgWp9wmxo &callback=initMap">
-    </script>*@
+    </script>
+
+    @*<form id="myform" name="myform">
+            <b> Search: </b> @Html.Editor("search")
+            <p></p>
+            <b> Campsites Displayed: </b>@Html.Editor("searchnumber")
+
+            @Html.DropDownList("stateinitial", FedFor01.Controllers.FiftyStates.StateListItems(), new { @class = "form-control" })
+
+            <p></p>
+            <b> Activity: </b> <input type="button" id="popupbutton" onclick="popup(this)" value="Activites" />
+            @Html.DropDownList("activity", FedFor01.Controllers.Activities.ActivityListItems(), new { @class = "form-control", @multiple = "multiple", @size = "32", @display = "block" })
 
 
-    @* google map api key  AIzaSyCsRgeXCc_jaRPraI_XZGuEWSJgWp9wmxo   *@
-    @*@using (Ajax.BeginForm("GetFromMainFrame", "Home", null,
-            new { role = "form" }))
-        {*@
+            <p></p>
+            <select id='sort' name="sort">
+                <option value="">Sort By</option>
+                <option selected="@ViewBag.NameSelect">Name</option>
+                <option selected="@ViewBag.IDSelect">ID</option>
+                <option selected="@ViewBag.DateSelect">Date</option>
+            </select>
+
+            <p></p>
+            <button onclick="offset.stepDown(1)">Previous 50</button>
+            <input type="number" min="0" step="50" value="@ViewBag.offsetnumber" id="offset" name="offset">
+            <button onclick="offset.stepUp(1)">Next 50</button>
+
+
+            <p></p>
+            <input type="submit" onclick="formtodata(search, searchnumber, stateinitial, sort, activity, offset)" value="Search">
+        </form>*@
+    @using (Html.BeginForm("Facility", "Home", FormMethod.Post, new { name = "myform", id = "myform", onsubmit = "SendData(); return false;" }))
+    {
+        <b> Search: </b> @Html.Editor("search")
+        <p></p>
+        <b> Campsites Displayed: </b>@Html.Editor("searchnumber")
+
+        @Html.DropDownList("stateinitial", FedFor01.Controllers.FiftyStates.StateListItems(), new { @class = "form-control" });
+
+        <p></p>
+        <b> Activity: </b> <input type="button" id="popupbutton" onclick="popup(this)" value="Activites" />
+        @Html.DropDownList("activity", FedFor01.Controllers.Activities.ActivityListItems(), new { @class = "form-control", @multiple = "multiple", @size = "32", @display = "block" });
+
+
+        <p></p>
+        <select id='sort' name="sort">
+            <option value="">Sort By</option>
+            <option selected="@ViewBag.NameSelect">Name</option>
+            <option selected="@ViewBag.IDSelect">ID</option>
+            <option selected="@ViewBag.DateSelect">Date</option>
+        </select>
+
+        <p></p>
+        <button onclick="offset.stepDown(1)">Previous 50</button>
+        <input type="number" min="0" step="50" value="@ViewBag.offsetnumber" id="offset" name="offset">
+        <button onclick="offset.stepUp(1)">Next 50</button>
+
+        <p></p>
+        <input type="submit" @*onclick="formtodata()"*@ value="Search">
+    }
+
+
 
 
     <h2>Facility</h2>
@@ -117,29 +223,7 @@
                 }
             </tbody>
         </table>
+        what
     </div>
-    @*  *@
+
 </body>
-
-@{
-    //if have a key
-    //        8319e388 - bede - 4b79 - 9b40 - 68faf1a8f49c
-
-    ViewBag.Title = "Facility";
-    //curl - X GET "https://ridb.recreation.gov/api/v1/Facilitys/77503/attributes?limit=50&offset=0" - H "accept: application/json"
-
-    //​/ Facilitys​ /{ FacilityId}
-    //https://www.fs.usda.gov/recarea/mtnf/recarea/?recid=77503
-
-    //curl - X GET "https://ridb.recreation.gov/api/v1/Facilitys/77503/attributes?limit=50&offset=0" - H "accept: application/json" - H "apikey: 8319e388 - bede - 4b79 - 9b40 - 68faf1a8f49c"
-
-
-    ////https://ridb.recreation.gov/api/v1/Facilitys/77503/attributes?limit=50&offset=0
-
-
-
-
-
-}
-
-

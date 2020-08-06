@@ -133,6 +133,8 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\Activities.cs" />
+    <Compile Include="Controllers\FiftyStates.cs" />
     <Compile Include="Controllers\AwaitOperatorBackup.cs" />
     <Compile Include="Controllers\AwaitOperatorCustom.cs" />
     <Compile Include="Controllers\HomeController.cs" />
