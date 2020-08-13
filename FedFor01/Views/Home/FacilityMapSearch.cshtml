@@ -96,38 +96,49 @@
     {
         <b> Search: </b> @Html.Editor("search")
         <p></p>
-        <b> Campsites Displayed: </b>@Html.Editor("searchnumber")
+        <b> Advanced Options: </b> <input type="button" id="popupbutton" onclick="popup(this)" value="Show/Hide" />
+                                   <div id="AdvOptions" style="display: none">
+                                       <p>State:</p>
+                                       @Html.DropDownList("stateinitial", FedFor01.Controllers.FiftyStates.StateListItems(), new { @class = "form-control", @id = "stateinitial" })
+                                       <p></p>
+                                       <p></p>
 
-        @Html.DropDownList("stateinitial", FedFor01.Controllers.FiftyStates.StateListItems(), new { @class = "form-control" });
+                                       <span>
+                                           <p>Activities:</p>
+                                           @Html.DropDownList("activity", FedFor01.Controllers.Activities.ActivityListItems(), new { @class = "form-control", @multiple = "multiple", @size = "12", @id = "activity" })
+                                       </span>
+
+                                       <p></p>
+                                       <select id='sort' name="sort" class="option">
+                                           <option value="">Sort By</option>
+                                           <option selected="@ViewBag.NameSelect">Name</option>
+                                           <option selected="@ViewBag.IDSelect">ID</option>
+                                           <option selected="@ViewBag.DateSelect">Date</option>
+                                       </select>
+                                       <p></p>
+
+                                       <b> Display: </b> <select id='searchnumber' name="searchnumber">
+                                           <option selected="@ViewBag.searchnumber10">10</option>
+                                           <option selected="@ViewBag.searchnumber25">25</option>
+                                           <option selected="@ViewBag.searchnumber50">50</option>
+                                       </select>
+                                       <!--<input type="button" onclick="searchnumber = 10" value="10"><input type="button" onclick="searchnumber = 25" value="25"><input type="button" onclick="searchnumber = 50" value="50">--> @*switch to "Show: 10/25/50"?*@
+
+                                       <button onclick="offset.stepDown(1)">Previous @ViewBag.searchnumber</button>
+                                       <input type="number" min="0" step="@ViewBag.searchnumber" value="0" id="offset" name="offset" />
+                                       <button onclick="offset.stepUp(1)">Next @ViewBag.searchnumber</button>
+                                   </div>
 
         <p></p>
-        <b> Activity: </b> <input type="button" id="popupbutton" onclick="popup(this)" value="Activites" />
-        @Html.DropDownList("activity", FedFor01.Controllers.Activities.ActivityListItems(), new { @class = "form-control", @multiple = "multiple", @size = "32", @display = "block" });
-
-
-        <p></p>
-        <select id='sort' name="sort">
-            <option value="">Sort By</option>
-            <option selected="@ViewBag.NameSelect">Name</option>
-            <option selected="@ViewBag.IDSelect">ID</option>
-            <option selected="@ViewBag.DateSelect">Date</option>
-        </select>
-
-        <p></p>
-        <button onclick="offset.stepDown(1)">Previous 50</button>
-        <input type="number" min="0" step="50" value="@ViewBag.offsetnumber" id="offset" name="offset">
-        <button onclick="offset.stepUp(1)">Next 50</button>
-
-        <p></p>
-        <input type="submit" name="submit" value="Search" />
+        <input type="submit" name="submit" value="Search" class="option"/>
     }
 
-    <ul id="checkBundle">
+    @*<ul id="checkBundle">
         <li><label><input type="checkbox" />test1</label>
         <li><label><input type="checkbox" />test2</label>
         <li><label><input type="checkbox" />test3</label>
         <li><label><input type="checkbox" />test4</label>
-    </ul>
+    </ul>*@
 
     @helper UnOrderedList(IEnumerable<string> items)
     {
@@ -146,16 +157,16 @@
 
 
 
-    <script>
+<script>
         function popup() {
-            var popwindow = document.getElementById("activity");
+            var popwindow = document.getElementById("AdvOptions");
             if (popwindow.style.display === "none") {
                 popwindow.style.display = "block";
             } else {
                 popwindow.style.display = "none";
             }
         };
-    </script>
+</script>
 
 
     <h2>Facility</h2>

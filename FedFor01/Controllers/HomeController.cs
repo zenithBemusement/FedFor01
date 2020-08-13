@@ -154,6 +154,7 @@ namespace FedFor01.Controllers
         {
 
             ViewBag.offsetnumber = offset;
+            ViewBag.searchnumber = 10;
 
             switch (sort)
             {
@@ -167,6 +168,21 @@ namespace FedFor01.Controllers
 
                 case "Date":
                     ViewBag.DateSelect = "selected";
+                    break;
+            }
+
+            switch (searchnumber)
+            {
+                case "10":
+                    ViewBag.searchnumber10 = "selected";
+                    break;
+
+                case "25":
+                    ViewBag.searchnumber25 = "selected";
+                    break;
+
+                case "50":
+                    ViewBag.searchnumber50 = "selected";
                     break;
             }
 
@@ -192,10 +208,12 @@ namespace FedFor01.Controllers
 
             }
 
-            int searchnumberint = 50;
+            int searchnumberint = 10;
             if (string.IsNullOrEmpty(searchnumber) == false)
             {
                 searchnumberint = Int32.Parse(searchnumber);
+                ViewBag.searchnumber = searchnumber;
+
             }
 
             int offsetVal = 0;
