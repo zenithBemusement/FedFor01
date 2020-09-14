@@ -1,0 +1,160 @@
+﻿@model IEnumerable<FedFor01.Models.RECDATA>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.FacilityID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LegacyFacilityID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.OrgFacilityID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ParentOrgID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ParentRecAreaID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FacilityName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FacilityDescription)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FacilityTypeDescription)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FacilityUseFeeDescription)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FacilityDirections)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FacilityPhone)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FacilityEmail)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FacilityReservationURL)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FacilityMapURL)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FacilityAdaAccess)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FacilityLongitude)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FacilityLatitude)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.StayLimit)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Keywords)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Reservable)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Enabled)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LastUpdatedDate)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.FacilityID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LegacyFacilityID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OrgFacilityID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ParentOrgID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ParentRecAreaID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FacilityName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FacilityDescription)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FacilityTypeDescription)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FacilityUseFeeDescription)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FacilityDirections)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FacilityPhone)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FacilityEmail)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FacilityReservationURL)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FacilityMapURL)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FacilityAdaAccess)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FacilityLongitude)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FacilityLatitude)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.StayLimit)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Keywords)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Reservable)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Enabled)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LastUpdatedDate)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.FacilityID }) |
+                @Html.ActionLink("Details", "Details", new { id = item.FacilityID }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.FacilityID })
+            </td>
+        </tr>
+    }
+
+</table>

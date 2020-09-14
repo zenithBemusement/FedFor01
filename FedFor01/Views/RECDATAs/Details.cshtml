@@ -1,0 +1,119 @@
+﻿@model FedFor01.ModelsSingle.Rootobject
+@using System.Data.Entity;
+
+
+@{
+    ViewBag.Title = "Details";
+}
+
+@*Exists solely to activate the function when the page loads*@
+<body onload="changedesc(`@Uri.EscapeUriString(Model.FacilityDescription)`, `@Uri.EscapeUriString(Model.FacilityDirections)`)">
+</body>
+
+@*Used to decode pre-formatted text into something usable*@
+<script>
+    function changedesc(desc, dir) {
+        var DecString = decodeURI(desc);
+        var DirString = decodeURI(dir);
+
+        document.getElementById("facdesc").innerHTML = DecString
+        document.getElementById("facdir").innerHTML = DirString
+    }
+</script>
+
+@*Lists all properties of the selected facility*@
+<div>
+    <h4>Details</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>Facility ID</dt>
+        <dd>@Model.FacilityID</dd>
+
+        <dt>Legacy Facility ID</dt>
+        <dd>@Model.LegacyFacilityID</dd>
+
+        <dt>Organization Facility ID</dt>
+        <dd>@Model.OrgFacilityID</dd>
+
+        <dt>Parent Organization ID</dt>
+        <dd>@Model.ParentOrgID</dd>
+
+        <dt>Parent Rec Area ID</dt>
+        <dd>@Model.ParentRecAreaID</dd>
+
+        <dt>Facility Name</dt>
+        <dd>@Model.FacilityName</dd>
+
+        <dt>Facility Description</dt>
+        <dd id="facdesc"></dd>
+
+        <dt>Facility Type Description</dt>
+        <dd>@Model.FacilityTypeDescription</dd>
+
+        <dt>Facility Use Fee Description</dt>
+        <dd>@Model.FacilityUseFeeDescription</dd>
+
+        <dt>Facility Directions</dt>
+        <dd id="facdir"></dd>
+
+        <dt>Facility Phone</dt>
+        <dd>@Model.FacilityPhone</dd>
+
+        <dt>Facility Email</dt>
+        <dd>@Model.FacilityEmail</dd>
+
+        <dt>Facility Reservation URL</dt>
+        <dd>@Model.FacilityReservationURL</dd>
+
+        <dt>Facility Map URL</dt>
+        <dd>@Model.FacilityMapURL</dd>
+
+        <dt>Facility ADA Access</dt>
+        <dd>@Model.FacilityAdaAccess</dd>
+
+        <dt>Facility Longitude</dt>
+        <dd>@Model.FacilityLongitude</dd>
+
+        <dt>Facility Latitude</dt>
+        <dd>@Model.FacilityLatitude</dd>
+
+        <dt>Stay Limit</dt>
+        <dd>@Model.StayLimit</dd>
+
+        <dt>Keywords</dt>
+        <dd>@Model.Keywords</dd>
+
+        <dt>Reservable</dt>
+        <dd>@Model.Reservable</dd>
+
+        <dt>Enabled</dt>
+        <dd>@Model.Enabled</dd>
+
+        <dt>Last Updated Date</dt>
+        <dd>@Model.LastUpdatedDate</dd>
+    </dl>
+</div>
+<hr />
+<div>
+    <h4>Campsites</h4>
+    @*@Html.ActionLink("Campsites", "Index", "Campsite", new { id = Model.FacilityID }, new { @class = "btn btn-primary", @style = "color:white" })*@
+    <input type="button" id="popupbutton" onclick="popup(this)" value="Show list of campsites" />
+    <div id="Campsites" style="display: none">@{Html.RenderAction("Index", "Campsite", new { id = Model.FacilityID });}</div>
+</div>
+<script>
+    function popup() {
+        var popwindow = document.getElementById("Campsites");
+        if (popwindow.style.display === "none") {
+            popwindow.style.display = "block";
+        } else {
+            popwindow.style.display = "none";
+        }
+    };
+</script>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.FacilityID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
+
+
+

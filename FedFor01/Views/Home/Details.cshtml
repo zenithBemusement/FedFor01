@@ -1,0 +1,194 @@
+﻿@model FedFor01.Models.RECDATA
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>RECDATA</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.FacilityID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FacilityID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LegacyFacilityID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LegacyFacilityID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.OrgFacilityID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.OrgFacilityID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ParentOrgID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ParentOrgID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ParentRecAreaID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ParentRecAreaID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FacilityName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FacilityName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FacilityDescription)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FacilityDescription)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FacilityTypeDescription)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FacilityTypeDescription)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FacilityUseFeeDescription)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FacilityUseFeeDescription)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FacilityDirections)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FacilityDirections)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FacilityPhone)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FacilityPhone)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FacilityEmail)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FacilityEmail)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FacilityReservationURL)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FacilityReservationURL)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FacilityMapURL)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FacilityMapURL)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FacilityAdaAccess)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FacilityAdaAccess)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FacilityLongitude)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FacilityLongitude)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FacilityLatitude)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FacilityLatitude)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.StayLimit)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.StayLimit)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Keywords)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Keywords)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Reservable)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Reservable)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Enabled)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Enabled)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LastUpdatedDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LastUpdatedDate)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

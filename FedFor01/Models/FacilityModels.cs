@@ -34,6 +34,7 @@ namespace FedFor01.Models
 
     public class RECDATA
     {
+        [Key]
         public string FacilityID { get; set; }
         public string LegacyFacilityID { get; set; }
         public string OrgFacilityID { get; set; }

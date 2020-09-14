@@ -46,6 +46,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -134,14 +140,20 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\Activities.cs" />
+    <Compile Include="Controllers\AwaitOperatorCampsite.cs" />
+    <Compile Include="Controllers\AwaitOperatorFacility.cs" />
+    <Compile Include="Controllers\CampsiteController.cs" />
     <Compile Include="Controllers\FiftyStates.cs" />
     <Compile Include="Controllers\AwaitOperatorBackup.cs" />
     <Compile Include="Controllers\AwaitOperatorCustom.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\RECDATAsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\CampsiteModel.cs" />
     <Compile Include="Models\FacilityModels.cs" />
+    <Compile Include="Models\OneFacilityModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -184,9 +196,19 @@
     <Content Include="Views\Home\SeachPage.cshtml" />
     <Content Include="Views\Home\FacilitySearch.cshtml" />
     <Content Include="Views\Home\FacilityMapSearch.cshtml" />
+    <Content Include="Views\Home\Details.cshtml" />
+    <Content Include="Views\RECDATAs\Details.cshtml" />
+    <Content Include="Views\RECDATAs\Edit.cshtml" />
+    <Content Include="Views\RECDATAs\Index.cshtml" />
+    <Content Include="Views\RECDATAs\DetailsBase.cshtml" />
+    <Content Include="Views\Campsite\Details.cshtml" />
+    <Content Include="Views\Campsite\DetailsPartial.cshtml" />
+    <Content Include="Views\Campsite\Index.cshtml" />
+    <Content Include="Views\Campsite\IndexPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Data\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

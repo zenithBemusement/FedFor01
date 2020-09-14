@@ -1,0 +1,92 @@
+﻿@model FedFor01.CampsiteModel.campsiteRECDATA
+
+<div>
+    <h4>campsiteRECDATA</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.FacilityID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FacilityID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CampsiteName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CampsiteName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CampsiteType)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CampsiteType)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TypeOfUse)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TypeOfUse)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Loop)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Loop)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CampsiteAccessible)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CampsiteAccessible)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CampsiteLongitude)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CampsiteLongitude)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CampsiteLatitude)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CampsiteLatitude)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CreatedDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CreatedDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LastUpdatedDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LastUpdatedDate)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.CampsiteID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

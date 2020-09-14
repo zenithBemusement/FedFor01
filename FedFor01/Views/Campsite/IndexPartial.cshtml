@@ -1,0 +1,87 @@
+﻿@model IEnumerable<FedFor01.CampsiteModel.campsiteRECDATA>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.CampsiteID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FacilityID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CampsiteName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CampsiteType)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TypeOfUse)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Loop)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CampsiteAccessible)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CampsiteLongitude)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CampsiteLatitude)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CreatedDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LastUpdatedDate)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.CampsiteID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FacilityID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CampsiteName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CampsiteType)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TypeOfUse)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Loop)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CampsiteAccessible)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CampsiteLongitude)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CampsiteLatitude)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CreatedDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LastUpdatedDate)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+        </td>
+    </tr>
+}
+
+</table>

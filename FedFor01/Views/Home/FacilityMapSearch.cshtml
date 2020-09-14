@@ -1,5 +1,6 @@
 ﻿@model IEnumerable<FedFor01.Models.RECDATA>
 
+
 @{
     ViewBag.Title = "FacilityMapSearch";
 }
@@ -87,9 +88,9 @@
     </script>
 
 
-    @*<script async defer
-                src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCsRgeXCc_jaRPraI_XZGuEWSJgWp9wmxo &callback=initMap">
-        </script>*@
+    <script async defer
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCsRgeXCc_jaRPraI_XZGuEWSJgWp9wmxo &callback=initMap">
+    </script>
 
 
     @using (Html.BeginForm("FacilityMapSearch", "Home", FormMethod.Post))
@@ -97,48 +98,48 @@
         <b> Search: </b> @Html.Editor("search")
         <p></p>
         <b> Advanced Options: </b> <input type="button" id="popupbutton" onclick="popup(this)" value="Show/Hide" />
-                                   <div id="AdvOptions" style="display: none">
-                                       <p>State:</p>
-                                       @Html.DropDownList("stateinitial", FedFor01.Controllers.FiftyStates.StateListItems(), new { @class = "form-control", @id = "stateinitial" })
-                                       <p></p>
-                                       <p></p>
+        <div id="AdvOptions" style="display: none">
+            <p>State:</p>
+            @Html.DropDownList("stateinitial", FedFor01.Controllers.FiftyStates.StateListItems(), new { @class = "form-control", @id = "stateinitial" })
+            <p></p>
+            <p></p>
 
-                                       <span>
-                                           <p>Activities:</p>
-                                           @Html.DropDownList("activity", FedFor01.Controllers.Activities.ActivityListItems(), new { @class = "form-control", @multiple = "multiple", @size = "12", @id = "activity" })
-                                       </span>
 
-                                       <p></p>
-                                       <select id='sort' name="sort" class="option">
-                                           <option value="">Sort By</option>
-                                           <option selected="@ViewBag.NameSelect">Name</option>
-                                           <option selected="@ViewBag.IDSelect">ID</option>
-                                           <option selected="@ViewBag.DateSelect">Date</option>
-                                       </select>
-                                       <p></p>
+            <p>Activities:</p>
+            @Html.DropDownList("activity", FedFor01.Controllers.Activities.ActivityListItems(), new { @class = "form-control", @multiple = "multiple", @size = "12", @id = "activity" })
 
-                                       <b> Display: </b> <select id='searchnumber' name="searchnumber">
-                                           <option selected="@ViewBag.searchnumber10">10</option>
-                                           <option selected="@ViewBag.searchnumber25">25</option>
-                                           <option selected="@ViewBag.searchnumber50">50</option>
-                                       </select>
-                                       <!--<input type="button" onclick="searchnumber = 10" value="10"><input type="button" onclick="searchnumber = 25" value="25"><input type="button" onclick="searchnumber = 50" value="50">--> @*switch to "Show: 10/25/50"?*@
 
-                                       <button onclick="offset.stepDown(1)">Previous @ViewBag.searchnumber</button>
-                                       <input type="number" min="0" step="@ViewBag.searchnumber" value="0" id="offset" name="offset" />
-                                       <button onclick="offset.stepUp(1)">Next @ViewBag.searchnumber</button>
-                                   </div>
+            <p></p>
+            <select id='sort' name="sort" class="option">
+                <option value="">Sort By</option>
+                <option selected="@ViewBag.NameSelect">Name</option>
+                <option selected="@ViewBag.IDSelect">ID</option>
+                <option selected="@ViewBag.DateSelect">Date</option>
+            </select>
+            <p></p>
+
+            <b> Display: </b> <select id='searchnumber' name="searchnumber">
+                <option selected="@ViewBag.searchnumber10">10</option>
+                <option selected="@ViewBag.searchnumber25">25</option>
+                <option selected="@ViewBag.searchnumber50">50</option>
+            </select>
+            <!--<input type="button" onclick="searchnumber = 10" value="10"><input type="button" onclick="searchnumber = 25" value="25"><input type="button" onclick="searchnumber = 50" value="50">--> @*switch to "Show: 10/25/50"?*@
+
+            <button onclick="offset.stepDown(1)">Previous @ViewBag.searchnumber</button>
+            <input type="number" min="0" step="@ViewBag.searchnumber" value="0" id="offset" name="offset" />
+            <button onclick="offset.stepUp(1)">Next @ViewBag.searchnumber</button>
+        </div>
 
         <p></p>
-        <input type="submit" name="submit" value="Search" class="option"/>
+        <input type="submit" name="submit" value="Search" class="option" />
     }
 
     @*<ul id="checkBundle">
-        <li><label><input type="checkbox" />test1</label>
-        <li><label><input type="checkbox" />test2</label>
-        <li><label><input type="checkbox" />test3</label>
-        <li><label><input type="checkbox" />test4</label>
-    </ul>*@
+            <li><label><input type="checkbox" />test1</label>
+            <li><label><input type="checkbox" />test2</label>
+            <li><label><input type="checkbox" />test3</label>
+            <li><label><input type="checkbox" />test4</label>
+        </ul>*@
 
     @helper UnOrderedList(IEnumerable<string> items)
     {
@@ -157,7 +158,7 @@
 
 
 
-<script>
+    <script>
         function popup() {
             var popwindow = document.getElementById("AdvOptions");
             if (popwindow.style.display === "none") {
@@ -166,7 +167,7 @@
                 popwindow.style.display = "none";
             }
         };
-</script>
+    </script>
 
 
     <h2>Facility</h2>
@@ -174,10 +175,11 @@
         <table class="table">
             <thead>
                 <tr class="bg-primary">
-                    <th>FacilityName</th>
-                    <th>FacilityID</th>
-                    <th>FacilityLatitude</th>
-                    <th>FacilityLongitude</th>
+                    <th>Facility Name</th>
+                    <th>Facility ID</th>
+                    <th>Facility Info</th>
+                    <th>Facility Latitude</th>
+                    <th>Facility Longitude</th>
 
                 </tr>
             </thead>
@@ -188,9 +190,12 @@
                         <td>
                             @RECDATA.FacilityName
                         </td>
-                        <td class="bg-info">
-                            @RECDATA.FacilityID
-                            <button id="loadFromMainFrame" onclick="targetFac(@RECDATA.FacilityLatitude,@RECDATA.FacilityLongitude)">Select</button>
+                        <td class="bg-info">@RECDATA.FacilityID</td>
+                        <td>
+                            <button id="loadFromMainFrame" onclick="targetFac(@RECDATA.FacilityLatitude,@RECDATA.FacilityLongitude)">Select On Map</button>
+                            @*<button id="showDetails" onclick="location.href='@Url.Action("Details", "Details", RECDATAs, new { id = RECDATA.FacilityID }, null)">Show Details</button>*@
+                            @Html.ActionLink("Details", "Details", "RECDATAs", new { id = RECDATA.FacilityID }, new { @class = "btn btn-primary", @style = "color:white" })
+
                         </td>
                         <td class="bg-info">@RECDATA.FacilityLatitude</td>
                         <td class="bg-info">@RECDATA.FacilityLongitude</td>
